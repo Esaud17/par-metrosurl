@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cafe</title>
+  <style media="screen">
+    .container {
+      height: 200px;
+      width: 100%;
+      border: 1px solid rgba(38, 38, 38,0.9);
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #contenido {
+      border-color: #06742c;
+    }
+
+    #alerta {
+      border-color: #f5002c;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="contenido" class="container">
+  soy el contenido normal
+</div>
+
+<div id="alerta" class="container">
+  <div>
+    redireccioando en
+    <span id="contador">00</span>:<span id="contador">00</span>:<span id="segundos">60</span>
+  </div>
+  <br>
+  este sitio ocupa un parametro para visulizar
+</div>
+
+<script src="./bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $.getParameterByName = function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  $('#contenido').hide();
+  $('#alerta').hide();
+
+  var xparametro = $.getParameterByName('parametro');
+
+  if(xparametro == null){
+    $('#alerta').show();
+    $('#segundos').html(60);
+    setInterval(function (tiempo) {
+       var tiempo =  parseInt($('#segundos').html());
+        tiempo--;
+      $('#segundos').html(tiempo);
+    },1000)
+    setTimeout(function(){
+      location.href = "/cafe.html?parametro=123456";
+    },parseInt($('#segundos').html())*1000)
+  }else{
+    console.log('parametro: ',xparametro);
+    $('#contenido').show();
+  }
+</script>
+</body>
+</html>
