@@ -33,7 +33,7 @@
 <div id="alerta" class="container">
   <div>
     redireccioando en
-    <span id="contador">00</span>:<span id="contador">00</span>:<span id="segundos">60</span>
+    <span id="contador">00</span>:<span id="contador">00</span>:<span id="segundos">00</span>
   </div>
   <br>
   este sitio ocupa un parametro para visulizar
@@ -60,7 +60,7 @@
 
   if(xparametro == null){
     $('#alerta').show();
-    $('#segundos').html(60);
+    $('#segundos').html(30);
     setInterval(function (tiempo) {
        var tiempo =  parseInt($('#segundos').html());
         tiempo--;
