@@ -40,6 +40,7 @@
 </div>
 
 <script src="./bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="./bower_components/jquery/dist/jquery.base64.js" type="text/javascript"></script>
 <script type="text/javascript">
   $.getParameterByName = function getParameterByName(name, url) {
       if (!url) {
@@ -67,9 +68,12 @@
       $('#segundos').html(tiempo);
     },1000)
     setTimeout(function(){
-      location.href = "/cafe.html?parametro=123456";
+      var html = "/cafe.html";
+      var paramt = "?parametro=";
+      var value = $.base64.encode("123456");
+      location.href = html+paramt+value ;
     },parseInt($('#segundos').html())*1000)
-  }else{
+  }else if($.base64.decode(xparametro) === "123456" ) {
     console.log('parametro: ',xparametro);
     $('#contenido').show();
   }
